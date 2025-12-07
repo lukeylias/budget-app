@@ -2,9 +2,10 @@
 
 A local-first, zero-dollar budgeting web application for managing fortnightly income allocation across expenses, savings, and investments.
 
-## Features
+## Features commit
 
 ### Phase 1 ✅ Complete - Foundation
+
 - ✅ Dashboard with safe-to-spend calculation
 - ✅ Account management (CRUD) with modal interface
 - ✅ Allocation management (CRUD) with modal interface
@@ -33,17 +34,20 @@ A local-first, zero-dollar budgeting web application for managing fortnightly in
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ installed
 - npm or yarn
 
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -80,24 +84,30 @@ src/
 ## Data Models
 
 ### Account
+
 Represents a bank account (UP, ING) with type (spending, expenses, savings, etc.)
 
 ### Allocation
+
 Represents a budgeted item (expense, saving, or investment) with:
+
 - Total amount
 - Frequency (weekly, fortnightly, monthly, quarterly, yearly)
 - Due date
 - Progress tracking (amount already saved)
 
 ### Income
+
 Represents fortnightly income with next pay date
 
 ### Settings
+
 App-wide settings including currency, date format, and theme
 
 ## Calculation Logic
 
 ### Fortnightly Allocation Amount
+
 ```
 fortnightlyAmount = totalAmount / frequency_in_fortnights
 
@@ -110,6 +120,7 @@ Where frequency_in_fortnights:
 ```
 
 ### Safe to Spend
+
 ```
 safeToSpend = income.amount - sum(all_active_allocations.fortnightlyAmount)
 ```
@@ -117,6 +128,7 @@ safeToSpend = income.amount - sum(all_active_allocations.fortnightlyAmount)
 ## Roadmap
 
 ### Phase 2 ✅ Complete - Enhanced UX
+
 - ✅ Calendar view for allocations with month navigation
 - ✅ List/Calendar view toggle
 - ✅ Progress tracking visualization with color-coded progress bars
@@ -124,6 +136,7 @@ safeToSpend = income.amount - sum(all_active_allocations.fortnightlyAmount)
 - ✅ Visual improvements and better UI feedback
 
 ### Phase 3 - Future Enhancements
+
 - [ ] Icon picker for allocations with 30+ options
 - [ ] Drag-to-reorder allocations within categories
 - [ ] Category breakdown donut charts
