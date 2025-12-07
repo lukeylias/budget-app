@@ -169,8 +169,6 @@ export function AllocationModal({
           icon: 'circle',
           notes,
           isActive: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
         })
       }
 

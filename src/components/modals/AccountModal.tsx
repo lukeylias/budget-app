@@ -110,8 +110,6 @@ export function AccountModal({ open, onOpenChange, account, onSuccess }: Account
           color,
           icon: 'wallet',
           order: count,
-          createdAt: new Date(),
-          updatedAt: new Date(),
         })
       }
 
