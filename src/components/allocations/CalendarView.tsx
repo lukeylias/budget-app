@@ -78,7 +78,6 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
 
     const isToday = currentDayDate.getTime() === today.getTime()
     const isPast = currentDayDate < today
-    const isFuture = currentDayDate > today
 
     calendarDays.push(
       <div

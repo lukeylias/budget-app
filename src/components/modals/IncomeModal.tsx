@@ -11,7 +11,6 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { getIncome, updateIncome } from '../../lib/db'
-import { formatDate } from '../../lib/utils'
 
 interface IncomeModalProps {
   open: boolean
