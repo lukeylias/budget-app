@@ -66,7 +66,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
   // Add empty cells for days before month starts
   for (let i = 0; i < startingDayOfWeek; i++) {
     calendarDays.push(
-      <div key={`empty-${i}`} className="min-h-[80px] md:min-h-[100px] p-1 md:p-2 border-2 border-black bg-muted/50" />
+      <div key={`empty-${i}`} className="min-h-[80px] md:min-h-[100px] p-1 md:p-2 border border-border bg-muted/30 rounded-lg" />
     )
   }
 
@@ -82,15 +82,15 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
     calendarDays.push(
       <div
         key={day}
-        className={`min-h-[80px] md:min-h-[120px] p-1 md:p-2 border-2 border-black transition-colors ${
+        className={`min-h-[80px] md:min-h-[120px] p-1 md:p-2 border border-border rounded-lg transition-colors ${
           isToday
-            ? 'bg-primary'
+            ? 'bg-primary/20 border-primary'
             : isPast
-            ? 'bg-muted/50 text-muted-foreground'
-            : 'bg-white'
+            ? 'bg-muted/30 text-muted-foreground'
+            : 'bg-card'
         }`}
       >
-        <div className={`font-black text-xs md:text-sm mb-1 md:mb-2 ${isToday ? 'text-black' : ''}`}>
+        <div className={`font-semibold text-xs md:text-sm mb-1 md:mb-2 ${isToday ? 'text-primary' : ''}`}>
           {day}
         </div>
         <div className="space-y-0.5 md:space-y-1">
@@ -105,7 +105,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
                 return (
                   <div
                     key={`more-${allocation.id}`}
-                    className="md:hidden text-[10px] font-black text-center py-0.5"
+                    className="md:hidden text-[10px] font-semibold text-center py-0.5 text-muted-foreground"
                   >
                     +{remainingCount}
                   </div>
@@ -116,7 +116,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
                 <button
                   key={allocation.id}
                   onClick={() => onAllocationClick(allocation)}
-                  className={`hidden md:block w-full text-left px-2 py-1 text-xs font-bold border-2 border-black transition-all hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-1px] hover:translate-y-[-1px] ${
+                  className={`hidden md:block w-full text-left px-2 py-1 text-xs font-medium rounded-md transition-all hover:opacity-80 ${
                     isPast ? 'opacity-60' : ''
                   }`}
                   style={{
@@ -125,7 +125,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
                   }}
                 >
                   <div className="truncate">{allocation.name}</div>
-                  <div className="text-xs">
+                  <div className="text-xs opacity-90">
                     {formatCurrency(calculateFortnightlyAmount(allocation))}
                   </div>
                 </button>
@@ -136,7 +136,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
               <button
                 key={allocation.id}
                 onClick={() => onAllocationClick(allocation)}
-                className={`w-full text-left px-1 md:px-2 py-0.5 md:py-1 text-[10px] md:text-xs font-bold border-2 border-black transition-all hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-1px] hover:translate-y-[-1px] ${
+                className={`w-full text-left px-1 md:px-2 py-0.5 md:py-1 text-[10px] md:text-xs font-medium rounded-md transition-all hover:opacity-80 ${
                   isPast ? 'opacity-60' : ''
                 }`}
                 style={{
@@ -145,7 +145,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
                 }}
               >
                 <div className="truncate">{allocation.name}</div>
-                <div className="hidden md:block text-xs">
+                <div className="hidden md:block text-xs opacity-90">
                   {formatCurrency(calculateFortnightlyAmount(allocation))}
                 </div>
               </button>
@@ -163,7 +163,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
         <Button variant="outline" size="sm" onClick={previousMonth}>
           <ChevronLeft className="w-4 h-4" />
         </Button>
-        <h2 className="text-lg md:text-2xl font-black uppercase">
+        <h2 className="text-lg md:text-2xl font-bold">
           {monthNames[month]} {year}
         </h2>
         <Button variant="outline" size="sm" onClick={nextMonth}>
@@ -172,12 +172,12 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
       </div>
 
       {/* Day Names - Full on desktop, Short on mobile */}
-      <div className="grid grid-cols-7 gap-0">
+      <div className="grid grid-cols-7 gap-1">
         {/* Mobile: Single letter day names */}
         {dayNamesShort.map((name, index) => (
           <div
             key={`mobile-${name}-${index}`}
-            className="md:hidden p-1.5 text-center font-black text-xs uppercase border-2 border-black bg-white"
+            className="md:hidden p-1.5 text-center font-semibold text-xs text-muted-foreground"
           >
             {name}
           </div>
@@ -186,7 +186,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
         {dayNames.map((name) => (
           <div
             key={name}
-            className="hidden md:block p-3 text-center font-black text-sm uppercase border-2 border-black bg-white"
+            className="hidden md:block p-3 text-center font-semibold text-sm text-muted-foreground"
           >
             {name}
           </div>
@@ -194,7 +194,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-0">
+      <div className="grid grid-cols-7 gap-1">
         {calendarDays}
       </div>
 
@@ -203,24 +203,24 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
         <CardContent className="pt-4 md:pt-6">
           <div className="grid grid-cols-2 md:flex md:items-center gap-3 md:gap-6">
             <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-expense border-2 border-black flex-shrink-0" />
-              <span className="text-xs md:text-sm font-bold uppercase">Expenses</span>
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-expense rounded-md flex-shrink-0" />
+              <span className="text-xs md:text-sm font-medium">Expenses</span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-saving border-2 border-black flex-shrink-0" />
-              <span className="text-xs md:text-sm font-bold uppercase">Savings</span>
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-saving rounded-md flex-shrink-0" />
+              <span className="text-xs md:text-sm font-medium">Savings</span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-investment border-2 border-black flex-shrink-0" />
-              <span className="text-xs md:text-sm font-bold uppercase">Investments</span>
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-investment rounded-md flex-shrink-0" />
+              <span className="text-xs md:text-sm font-medium">Investments</span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-primary border-2 border-black flex-shrink-0" />
-              <span className="text-xs md:text-sm font-bold uppercase">Today</span>
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-primary/20 border border-primary rounded-md flex-shrink-0" />
+              <span className="text-xs md:text-sm font-medium">Today</span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2 col-span-2 md:col-span-1">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-muted/50 border-2 border-black flex-shrink-0" />
-              <span className="text-xs md:text-sm font-bold uppercase">Past</span>
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-muted/50 rounded-md flex-shrink-0" />
+              <span className="text-xs md:text-sm font-medium">Past</span>
             </div>
           </div>
         </CardContent>

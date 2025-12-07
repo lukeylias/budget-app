@@ -268,7 +268,7 @@ export function AllocationModal({
             </div>
 
             {fortnightlyPreview !== null && (
-              <div className="p-3 bg-muted rounded-md">
+              <div className="p-3 bg-muted rounded-xl">
                 <p className="text-sm font-medium">
                   Per fortnight: {formatCurrency(fortnightlyPreview)}
                 </p>

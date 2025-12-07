@@ -66,7 +66,7 @@ export function Dashboard() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto">
-          <Card className="border-2 border-dashed">
+          <Card>
             <CardHeader className="text-center pb-4">
               <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                 <DollarSign className="w-8 h-8 text-primary" />
@@ -101,12 +101,12 @@ export function Dashboard() {
   return (
     <div className="container mx-auto px-4 py-6 md:py-8 space-y-6 max-w-7xl">
       {/* Safe to Spend Hero Section */}
-      <Card className="bg-white">
+      <Card>
         <CardContent className="p-6 md:p-8">
           <div className="flex items-start justify-between mb-6">
             <div>
-              <p className="text-sm font-bold uppercase tracking-wider mb-2">Available to Spend</p>
-              <h2 className="text-4xl md:text-6xl font-black">
+              <p className="text-sm font-medium text-muted-foreground mb-2">Available to Spend</p>
+              <h2 className="text-4xl md:text-5xl font-bold">
                 {formatCurrency(safeToSpend)}
               </h2>
             </div>
@@ -119,24 +119,24 @@ export function Dashboard() {
             </Button>
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t-4 border-black">
+          <div className="flex items-center justify-between pt-4 border-t border-border">
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <TrendingUp className="w-4 h-4" />
-                <span className="font-bold text-sm">Income:</span>
+                <span className="font-medium text-sm">Income:</span>
               </div>
-              <span className="font-black">{formatCurrency(income.amount)}</span>
+              <span className="font-semibold">{formatCurrency(income.amount)}</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <TrendingDown className="w-4 h-4" />
-                <span className="font-bold text-sm">Allocated:</span>
+                <span className="font-medium text-sm">Allocated:</span>
               </div>
-              <span className="font-black">{formatCurrency(totalAllocated)}</span>
+              <span className="font-semibold">{formatCurrency(totalAllocated)}</span>
             </div>
           </div>
 
-          <p className="text-xs font-bold uppercase mt-4">
+          <p className="text-xs font-medium text-muted-foreground mt-4">
             Next pay: {formatDate(income.nextPayDate)}
           </p>
         </CardContent>
@@ -145,22 +145,22 @@ export function Dashboard() {
       {/* Allocation Breakdown Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="overflow-hidden relative">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-expense" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-expense rounded-t-2xl" />
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-bold uppercase tracking-wider">
+              <CardTitle className="text-base font-semibold">
                 Expenses
               </CardTitle>
-              <div className="w-10 h-10 bg-expense/10 flex items-center justify-center border-2 border-black">
-                <CreditCard className="w-5 h-5" />
+              <div className="w-10 h-10 bg-expense/10 rounded-xl flex items-center justify-center">
+                <CreditCard className="w-5 h-5 text-expense" />
               </div>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-black mb-1">{formatCurrency(breakdown.expense.amount)}</p>
+            <p className="text-3xl font-bold mb-1">{formatCurrency(breakdown.expense.amount)}</p>
             <div className="flex items-center gap-2 text-sm">
-              <span className="font-bold">per fortnight</span>
-              <span className="px-2 py-0.5 bg-expense/10 text-expense font-black text-xs border-2 border-black">
+              <span className="font-medium text-muted-foreground">per fortnight</span>
+              <span className="px-2 py-0.5 bg-expense/10 text-expense font-semibold text-xs rounded-lg">
                 {breakdown.expense.percentage}%
               </span>
             </div>
@@ -168,22 +168,22 @@ export function Dashboard() {
         </Card>
 
         <Card className="overflow-hidden relative">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-saving" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-saving rounded-t-2xl" />
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-bold uppercase tracking-wider">
+              <CardTitle className="text-base font-semibold">
                 Savings
               </CardTitle>
-              <div className="w-10 h-10 bg-saving/10 flex items-center justify-center border-2 border-black">
-                <PiggyBank className="w-5 h-5" />
+              <div className="w-10 h-10 bg-saving/10 rounded-xl flex items-center justify-center">
+                <PiggyBank className="w-5 h-5 text-saving" />
               </div>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-black mb-1">{formatCurrency(breakdown.saving.amount)}</p>
+            <p className="text-3xl font-bold mb-1">{formatCurrency(breakdown.saving.amount)}</p>
             <div className="flex items-center gap-2 text-sm">
-              <span className="font-bold">per fortnight</span>
-              <span className="px-2 py-0.5 bg-saving/10 text-saving font-black text-xs border-2 border-black">
+              <span className="font-medium text-muted-foreground">per fortnight</span>
+              <span className="px-2 py-0.5 bg-saving/10 text-saving font-semibold text-xs rounded-lg">
                 {breakdown.saving.percentage}%
               </span>
             </div>
@@ -191,22 +191,22 @@ export function Dashboard() {
         </Card>
 
         <Card className="overflow-hidden relative">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-investment" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-investment rounded-t-2xl" />
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-bold uppercase tracking-wider">
+              <CardTitle className="text-base font-semibold">
                 Investments
               </CardTitle>
-              <div className="w-10 h-10 bg-investment/10 flex items-center justify-center border-2 border-black">
-                <TrendingUp className="w-5 h-5" />
+              <div className="w-10 h-10 bg-investment/10 rounded-xl flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-investment" />
               </div>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-black mb-1">{formatCurrency(breakdown.investment.amount)}</p>
+            <p className="text-3xl font-bold mb-1">{formatCurrency(breakdown.investment.amount)}</p>
             <div className="flex items-center gap-2 text-sm">
-              <span className="font-bold">per fortnight</span>
-              <span className="px-2 py-0.5 bg-investment/10 text-investment font-black text-xs border-2 border-black">
+              <span className="font-medium text-muted-foreground">per fortnight</span>
+              <span className="px-2 py-0.5 bg-investment/10 text-investment font-semibold text-xs rounded-lg">
                 {breakdown.investment.percentage}%
               </span>
             </div>
@@ -219,8 +219,8 @@ export function Dashboard() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-xl font-black uppercase">Accounts</CardTitle>
-              <CardDescription className="font-bold">Your bank account balances</CardDescription>
+              <CardTitle className="text-xl font-bold">Accounts</CardTitle>
+              <CardDescription>Your bank account balances</CardDescription>
             </div>
             <Button onClick={handleAddAccount} size="sm" className="gap-2">
               <Plus className="w-4 h-4" />
@@ -230,11 +230,11 @@ export function Dashboard() {
         </CardHeader>
         <CardContent>
           {accounts.length === 0 ? (
-            <div className="text-center py-12 border-4 border-dashed border-black">
-              <div className="mx-auto w-16 h-16 bg-primary border-4 border-black flex items-center justify-center mb-4">
-                <DollarSign className="w-8 h-8 text-black" />
+            <div className="text-center py-12 border-2 border-dashed border-border rounded-xl">
+              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <DollarSign className="w-8 h-8 text-primary" />
               </div>
-              <p className="text-muted-foreground mb-4 font-bold">No accounts yet</p>
+              <p className="text-muted-foreground mb-4 font-medium">No accounts yet</p>
               <Button onClick={handleAddAccount} variant="outline" className="gap-2">
                 <Plus className="w-4 h-4" />
                 Add Your First Account
@@ -245,24 +245,24 @@ export function Dashboard() {
               {accounts.map((account) => (
                 <div
                   key={account.id}
-                  className="group flex items-center justify-between p-4 border-4 border-black bg-white hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                  className="group flex items-center justify-between p-4 rounded-xl bg-background hover:bg-muted/50 transition-all cursor-pointer"
                   onClick={() => handleEditAccount(account)}
                 >
                   <div className="flex items-center gap-4">
                     <div
-                      className="w-12 h-12 border-4 border-black flex items-center justify-center text-white font-black uppercase text-sm"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm"
                       style={{ backgroundColor: account.color }}
                     >
                       {account.bank.substring(0, 2).toUpperCase()}
                     </div>
                     <div>
-                      <p className="font-black text-base uppercase">
+                      <p className="font-semibold text-base">
                         {account.bank} - {account.name}
                       </p>
-                      <p className="text-sm font-bold capitalize">{account.type}</p>
+                      <p className="text-sm text-muted-foreground capitalize">{account.type}</p>
                     </div>
                   </div>
-                  <p className="text-xl font-black tabular-nums">
+                  <p className="text-xl font-bold tabular-nums">
                     {formatCurrency(account.currentBalance)}
                   </p>
                 </div>

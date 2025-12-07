@@ -71,13 +71,13 @@ export function Allocations() {
 
         <div className="flex gap-3 items-center flex-wrap">
           {/* View Toggle */}
-          <div className="inline-flex gap-1 p-1 bg-muted">
+          <div className="inline-flex gap-1 p-1 bg-muted rounded-xl">
             <button
               onClick={() => setViewMode('list')}
-              className={`gap-2 inline-flex items-center justify-center px-3 h-9 text-sm font-bold border-4 border-black transition-colors ${
+              className={`gap-2 inline-flex items-center justify-center px-3 h-9 text-sm font-semibold rounded-lg transition-all ${
                 viewMode === 'list'
-                  ? 'bg-primary text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                  : 'bg-white text-black'
+                  ? 'bg-card text-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               <List className="w-4 h-4" />
@@ -85,10 +85,10 @@ export function Allocations() {
             </button>
             <button
               onClick={() => setViewMode('calendar')}
-              className={`gap-2 inline-flex items-center justify-center px-3 h-9 text-sm font-bold border-4 border-black transition-colors ${
+              className={`gap-2 inline-flex items-center justify-center px-3 h-9 text-sm font-semibold rounded-lg transition-all ${
                 viewMode === 'calendar'
-                  ? 'bg-primary text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                  : 'bg-white text-black'
+                  ? 'bg-card text-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               <CalendarIcon className="w-4 h-4" />
@@ -108,20 +108,20 @@ export function Allocations() {
         <div className="flex gap-2 overflow-x-auto pb-2">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 text-sm font-bold transition-all whitespace-nowrap border-4 border-black ${
+            className={`px-4 py-2 text-sm font-semibold transition-all whitespace-nowrap rounded-xl ${
               filter === 'all'
-                ? 'bg-primary text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                : 'bg-white hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-card hover:bg-muted'
             }`}
           >
             All
           </button>
           <button
             onClick={() => setFilter('expense')}
-            className={`px-4 py-2 text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 border-4 border-black ${
+            className={`px-4 py-2 text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-2 rounded-xl ${
               filter === 'expense'
-                ? 'bg-expense text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                : 'bg-white hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]'
+                ? 'bg-expense text-white'
+                : 'bg-card hover:bg-muted'
             }`}
           >
             <CreditCard className="w-4 h-4" />
@@ -129,10 +129,10 @@ export function Allocations() {
           </button>
           <button
             onClick={() => setFilter('saving')}
-            className={`px-4 py-2 text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 border-4 border-black ${
+            className={`px-4 py-2 text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-2 rounded-xl ${
               filter === 'saving'
-                ? 'bg-saving text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                : 'bg-white hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]'
+                ? 'bg-saving text-white'
+                : 'bg-card hover:bg-muted'
             }`}
           >
             <PiggyBank className="w-4 h-4" />
@@ -140,10 +140,10 @@ export function Allocations() {
           </button>
           <button
             onClick={() => setFilter('investment')}
-            className={`px-4 py-2 text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 border-4 border-black ${
+            className={`px-4 py-2 text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-2 rounded-xl ${
               filter === 'investment'
-                ? 'bg-investment text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                : 'bg-white hover:bg-black hover:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]'
+                ? 'bg-investment text-white'
+                : 'bg-card hover:bg-muted'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
@@ -154,7 +154,7 @@ export function Allocations() {
 
       {/* Content - List or Calendar View */}
       {allocations.length === 0 ? (
-        <Card className="border-2 border-dashed">
+        <Card>
           <CardContent className="py-16 text-center">
             <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
               <Plus className="w-8 h-8 text-muted-foreground" />
@@ -184,7 +184,7 @@ export function Allocations() {
               onAllocationClick={handleEditAllocation}
             />
           ) : filter === 'expense' && groupedAllocations.expense.length === 0 ? (
-            <Card className="border-2 border-dashed">
+            <Card>
               <CardContent className="py-12 text-center">
                 <p className="text-muted-foreground">No expense allocations yet.</p>
               </CardContent>
@@ -200,7 +200,7 @@ export function Allocations() {
               onAllocationClick={handleEditAllocation}
             />
           ) : filter === 'saving' && groupedAllocations.saving.length === 0 ? (
-            <Card className="border-2 border-dashed">
+            <Card>
               <CardContent className="py-12 text-center">
                 <p className="text-muted-foreground">No saving allocations yet.</p>
               </CardContent>
@@ -216,7 +216,7 @@ export function Allocations() {
               onAllocationClick={handleEditAllocation}
             />
           ) : filter === 'investment' && groupedAllocations.investment.length === 0 ? (
-            <Card className="border-2 border-dashed">
+            <Card>
               <CardContent className="py-12 text-center">
                 <p className="text-muted-foreground">No investment allocations yet.</p>
               </CardContent>
@@ -255,19 +255,19 @@ function CategorySection({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-white border-4 border-black flex items-center justify-center">
+          <div className="w-12 h-12 bg-card rounded-xl flex items-center justify-center">
             <Icon className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-black uppercase">{title}</h2>
-            <p className="text-sm font-bold">
+            <h2 className="text-xl font-bold">{title}</h2>
+            <p className="text-sm text-muted-foreground">
               {allocations.length} {allocations.length === 1 ? 'item' : 'items'}
             </p>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-2xl font-black tabular-nums">{formatCurrency(total)}</p>
-          <p className="text-xs font-bold uppercase">per fortnight</p>
+          <p className="text-2xl font-bold tabular-nums">{formatCurrency(total)}</p>
+          <p className="text-xs text-muted-foreground">per fortnight</p>
         </div>
       </div>
       <div className="grid gap-3">
@@ -313,43 +313,43 @@ function AllocationCard({
 
   return (
     <Card
-      className="cursor-pointer overflow-hidden group hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+      className="cursor-pointer overflow-hidden group hover:bg-muted/30 transition-all"
       onClick={onClick}
     >
       <div className="flex items-center p-4 gap-4">
         {/* Color indicator */}
         <div
-          className="w-2 h-20 -ml-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="w-1 h-16 -ml-4 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ backgroundColor: allocation.color }}
         />
 
         {/* Icon/Avatar */}
         <div
-          className="w-14 h-14 flex items-center justify-center border-4 border-black bg-white transition-colors"
+          className="w-12 h-12 flex items-center justify-center rounded-xl bg-muted transition-colors"
         >
-          <Icon className="w-6 h-6 text-black" />
+          <Icon className="w-5 h-5 text-foreground" />
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4 mb-2">
             <div className="flex-1 min-w-0">
-              <h3 className="font-black text-base truncate uppercase">{allocation.name}</h3>
-              <p className="text-sm font-bold">
+              <h3 className="font-semibold text-base truncate">{allocation.name}</h3>
+              <p className="text-sm text-muted-foreground">
                 Due {formatDate(allocation.dueDate)} • {allocation.frequency}
               </p>
             </div>
             <div className="text-right flex-shrink-0">
-              <p className="font-black text-lg tabular-nums">{formatCurrency(fortnightlyAmount)}</p>
-              <p className="text-xs font-bold">/fortnight</p>
+              <p className="font-bold text-lg tabular-nums">{formatCurrency(fortnightlyAmount)}</p>
+              <p className="text-xs text-muted-foreground">/fortnight</p>
             </div>
           </div>
 
           {/* Progress bar */}
           <div className="space-y-1.5">
-            <div className="w-full bg-white h-4 border-4 border-black transition-colors">
+            <div className="w-full bg-muted h-2 rounded-full overflow-hidden">
               <div
-                className="h-full"
+                className="h-full rounded-full transition-all"
                 style={{
                   width: `${Math.min(100, progressPercentage)}%`,
                   backgroundColor: allocation.color,
@@ -357,10 +357,10 @@ function AllocationCard({
               />
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="font-bold">
+              <span className="text-muted-foreground">
                 {formatCurrency(allocation.amountAlreadySaved)} saved
               </span>
-              <span className="font-black transition-colors" style={{ color: allocation.color }}>
+              <span className="font-semibold" style={{ color: allocation.color }}>
                 {Math.round(progressPercentage)}%
               </span>
             </div>

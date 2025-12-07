@@ -8,25 +8,25 @@ export function Header() {
   const isActive = (path: string) => location.pathname === path
 
   return (
-    <header className="border-b-4 border-black bg-card">
+    <header className="bg-card">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link
             to="/"
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 bg-primary border-4 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
-              <DollarSign className="h-6 w-6 text-black font-black" />
+            <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center transition-all">
+              <DollarSign className="h-6 w-6 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-black uppercase tracking-tight">Budget App</h1>
+            <h1 className="text-xl font-bold tracking-tight">Budget App</h1>
           </Link>
 
           <div className="flex gap-6">
             <Link
               to="/"
               className={cn(
-                "text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary",
-                isActive('/') ? 'text-primary' : 'text-foreground'
+                "text-sm font-semibold transition-colors hover:text-primary",
+                isActive('/') ? 'text-primary' : 'text-muted-foreground'
               )}
             >
               Dashboard
@@ -34,8 +34,8 @@ export function Header() {
             <Link
               to="/allocations"
               className={cn(
-                "text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary",
-                isActive('/allocations') ? 'text-primary' : 'text-foreground'
+                "text-sm font-semibold transition-colors hover:text-primary",
+                isActive('/allocations') ? 'text-primary' : 'text-muted-foreground'
               )}
             >
               Allocations
