@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select'
-import { db } from '../../lib/db'
+import { db, getAllocationsByAccountId } from '../../lib/db'
 import type { Account, BankType, AccountType } from '../../types'
 
 interface AccountModalProps {
@@ -129,7 +129,7 @@ export function AccountModal({ open, onOpenChange, account, onSuccess }: Account
     if (!account) return
 
     // Check if any allocations use this account
-    const allocations = await db.allocations.where('accountId').equals(account.id).count()
+    const allocations = await getAllocationsByAccountId(account.id)
 
     if (allocations > 0) {
       alert(
