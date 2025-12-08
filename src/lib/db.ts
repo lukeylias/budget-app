@@ -24,7 +24,7 @@ function rowToAllocation(row: any): Allocation {
     category: row.category,
     totalAmount: row.total_amount,
     frequency: row.frequency,
-    dueDate: new Date(row.due_date),
+    dueDate: row.due_date ? new Date(row.due_date) : undefined,
     accountId: row.account_id,
     amountAlreadySaved: row.amount_already_saved,
     color: row.color,
@@ -312,7 +312,7 @@ export async function createAllocation(allocation: Omit<Allocation, 'createdAt' 
     category: allocation.category,
     total_amount: allocation.totalAmount,
     frequency: allocation.frequency,
-    due_date: allocation.dueDate.toISOString(),
+    due_date: allocation.dueDate ? allocation.dueDate.toISOString() : null,
     account_id: allocation.accountId,
     amount_already_saved: allocation.amountAlreadySaved,
     color: allocation.color,
@@ -334,7 +334,7 @@ export async function updateAllocation(id: string, updates: Partial<Allocation>)
   if (updates.category !== undefined) updateData.category = updates.category
   if (updates.totalAmount !== undefined) updateData.total_amount = updates.totalAmount
   if (updates.frequency !== undefined) updateData.frequency = updates.frequency
-  if (updates.dueDate !== undefined) updateData.due_date = updates.dueDate.toISOString()
+  if (updates.dueDate !== undefined) updateData.due_date = updates.dueDate ? updates.dueDate.toISOString() : null
   if (updates.accountId !== undefined) updateData.account_id = updates.accountId
   if (updates.amountAlreadySaved !== undefined) updateData.amount_already_saved = updates.amountAlreadySaved
   if (updates.color !== undefined) updateData.color = updates.color

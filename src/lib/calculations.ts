@@ -5,12 +5,15 @@ import { differenceInCalendarDays } from 'date-fns'
  * Convert frequency to number of fortnights
  */
 export function getFrequencyInFortnights(frequency: FrequencyType): number {
+  // 26 fortnights per year (52 weeks / 2)
+  const FORTNIGHTS_PER_YEAR = 26
+
   const frequencies: Record<FrequencyType, number> = {
-    fortnightly: 1,
-    weekly: 0.5,
-    monthly: 2.17, // 52 weeks / 12 months / 2
-    quarterly: 6.5, // 26 fortnights / 4
-    yearly: 26,
+    weekly: 0.5,                              // 1 week = 0.5 fortnights
+    fortnightly: 1,                           // 1 fortnight
+    monthly: FORTNIGHTS_PER_YEAR / 12,        // 26/12 = 2.1667 fortnights
+    quarterly: FORTNIGHTS_PER_YEAR / 4,       // 26/4 = 6.5 fortnights
+    yearly: FORTNIGHTS_PER_YEAR,              // 26 fortnights
   }
   return frequencies[frequency]
 }
@@ -73,7 +76,7 @@ export function calculateCategoryBreakdown(
 export function calculateAllocationProgress(allocation: Allocation): {
   progressPercentage: number
   remainingToSave: number
-  fortnightsUntilDue: number
+  fortnightsUntilDue: number | null
   onTrack: boolean
 } {
   const progressPercentage =
@@ -84,8 +87,13 @@ export function calculateAllocationProgress(allocation: Allocation): {
   const remainingToSave = allocation.totalAmount - allocation.amountAlreadySaved
 
   const today = new Date()
-  const daysUntilDue = differenceInCalendarDays(allocation.dueDate, today)
-  const fortnightsUntilDue = Math.max(0, Math.ceil(daysUntilDue / 14))
+
+  // Calculate fortnights until due (null if no due date)
+  let fortnightsUntilDue: number | null = null
+  if (allocation.dueDate) {
+    const daysUntilDue = differenceInCalendarDays(allocation.dueDate, today)
+    fortnightsUntilDue = Math.max(0, Math.ceil(daysUntilDue / 14))
+  }
 
   // Calculate how many fortnights have elapsed since creation
   const daysSinceCreation = differenceInCalendarDays(today, allocation.createdAt)

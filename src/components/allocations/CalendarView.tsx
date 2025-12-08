@@ -23,8 +23,9 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
   const daysInMonth = lastDayOfMonth.getDate()
   const startingDayOfWeek = firstDayOfMonth.getDay() // 0 = Sunday
 
-  // Get allocations for this month
+  // Get allocations for this month (only those with a due date)
   const allocationsInMonth = allocations.filter((allocation) => {
+    if (!allocation.dueDate) return false
     const dueDate = new Date(allocation.dueDate)
     return (
       dueDate.getMonth() === month &&
@@ -35,6 +36,7 @@ export function CalendarView({ allocations, onAllocationClick }: CalendarViewPro
   // Group allocations by day
   const allocationsByDay: Record<number, Allocation[]> = {}
   allocationsInMonth.forEach((allocation) => {
+    if (!allocation.dueDate) return
     const day = new Date(allocation.dueDate).getDate()
     if (!allocationsByDay[day]) {
       allocationsByDay[day] = []

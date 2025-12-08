@@ -291,10 +291,6 @@ function AllocationCard({
   onClick: () => void
 }) {
   const fortnightlyAmount = calculateFortnightlyAmount(allocation)
-  const progressPercentage =
-    allocation.totalAmount > 0
-      ? (allocation.amountAlreadySaved / allocation.totalAmount) * 100
-      : 0
 
   const getCategoryIcon = () => {
     switch (allocation.category) {
@@ -312,61 +308,28 @@ function AllocationCard({
   const Icon = getCategoryIcon()
 
   return (
-    <Card
-      className="cursor-pointer overflow-hidden group hover:bg-muted/30 transition-all"
+    <div
+      className="flex items-center p-4 gap-4 bg-card rounded-2xl cursor-pointer hover:bg-muted transition-all"
       onClick={onClick}
     >
-      <div className="flex items-center p-4 gap-4">
-        {/* Color indicator */}
-        <div
-          className="w-1 h-16 -ml-4 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ backgroundColor: allocation.color }}
-        />
-
-        {/* Icon/Avatar */}
-        <div
-          className="w-12 h-12 flex items-center justify-center rounded-xl bg-muted transition-colors"
-        >
-          <Icon className="w-5 h-5 text-foreground" />
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-base truncate">{allocation.name}</h3>
-              <p className="text-sm text-muted-foreground">
-                Due {formatDate(allocation.dueDate)} • {allocation.frequency}
-              </p>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <p className="font-bold text-lg tabular-nums">{formatCurrency(fortnightlyAmount)}</p>
-              <p className="text-xs text-muted-foreground">/fortnight</p>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div className="space-y-1.5">
-            <div className="w-full bg-muted h-2 rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{
-                  width: `${Math.min(100, progressPercentage)}%`,
-                  backgroundColor: allocation.color,
-                }}
-              />
-            </div>
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">
-                {formatCurrency(allocation.amountAlreadySaved)} saved
-              </span>
-              <span className="font-semibold" style={{ color: allocation.color }}>
-                {Math.round(progressPercentage)}%
-              </span>
-            </div>
-          </div>
-        </div>
+      {/* Circular Icon */}
+      <div
+        className="w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0"
+        style={{ backgroundColor: `${allocation.color}20` }}
+      >
+        <Icon className="w-5 h-5" style={{ color: allocation.color }} />
       </div>
-    </Card>
+
+      {/* Name */}
+      <div className="flex-1 min-w-0">
+        <h3 className="font-medium text-base truncate">{allocation.name}</h3>
+      </div>
+
+      {/* Amount - right aligned, stacked */}
+      <div className="text-right flex-shrink-0">
+        <p className="text-xs text-muted-foreground">Amount</p>
+        <p className="font-semibold text-base tabular-nums">{formatCurrency(fortnightlyAmount)}</p>
+      </div>
+    </div>
   )
 }

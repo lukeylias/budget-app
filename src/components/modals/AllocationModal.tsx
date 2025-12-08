@@ -73,7 +73,7 @@ export function AllocationModal({
       setCategory(allocation.category)
       setTotalAmount(allocation.totalAmount.toString())
       setFrequency(allocation.frequency)
-      setDueDate(allocation.dueDate.toISOString().split('T')[0])
+      setDueDate(allocation.dueDate ? allocation.dueDate.toISOString().split('T')[0] : '')
       setAccountId(allocation.accountId)
       setAmountAlreadySaved(allocation.amountAlreadySaved.toString())
       setColor(allocation.color)
@@ -147,7 +147,7 @@ export function AllocationModal({
           category,
           totalAmount: parseFloat(totalAmount),
           frequency,
-          dueDate: new Date(dueDate),
+          dueDate: dueDate ? new Date(dueDate) : undefined,
           accountId,
           amountAlreadySaved: parseFloat(amountAlreadySaved),
           color,
@@ -162,7 +162,7 @@ export function AllocationModal({
           category,
           totalAmount: parseFloat(totalAmount),
           frequency,
-          dueDate: new Date(dueDate),
+          dueDate: dueDate ? new Date(dueDate) : undefined,
           accountId,
           amountAlreadySaved: parseFloat(amountAlreadySaved),
           color,
@@ -276,13 +276,12 @@ export function AllocationModal({
             )}
 
             <div className="grid gap-2">
-              <Label htmlFor="dueDate">Due Date</Label>
+              <Label htmlFor="dueDate">Due Date (Optional)</Label>
               <Input
                 id="dueDate"
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                required
               />
             </div>
 

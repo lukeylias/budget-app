@@ -23,7 +23,7 @@ export interface Allocation {
   category: AllocationCategory
   totalAmount: number // total cost of the bill/goal
   frequency: FrequencyType
-  dueDate: Date // when the bill is actually due or goal target date
+  dueDate?: Date // when the bill is actually due or goal target date (optional)
   accountId: string // which account this is linked to
   amountAlreadySaved: number // manually updated by user
   color: string // for visual identification
@@ -71,7 +71,7 @@ export interface AllocationRow {
   category: AllocationCategory
   total_amount: number
   frequency: FrequencyType
-  due_date: string
+  due_date: string | null
   account_id: string
   amount_already_saved: number
   color: string
